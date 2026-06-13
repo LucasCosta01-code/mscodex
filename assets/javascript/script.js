@@ -11,6 +11,10 @@ const backToTop = document.querySelector('[data-back-to-top]');
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const themeToggleIcon = themeToggle?.querySelector('.theme-toggle-icon');
 const themeToggleText = themeToggle?.querySelector('.theme-toggle-text');
+const musicToggle = document.querySelector('[data-music-toggle]');
+const siteMusic = document.querySelector('[data-site-music]');
+const musicToggleIcon = musicToggle?.querySelector('.music-toggle-icon');
+const musicToggleText = musicToggle?.querySelector('.music-toggle-text');
 const animatedTitles = document.querySelectorAll('.section-heading h2, .split-section h2, .contact-copy h2');
 const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -48,6 +52,44 @@ themeToggle?.addEventListener('click', () => {
   localStorage.setItem('mscodex-theme', nextTheme);
   applyTheme(nextTheme);
 });
+
+function updateMusicButton(isPlaying) {
+  musicToggle?.classList.toggle('is-playing', isPlaying);
+  musicToggle?.setAttribute('aria-pressed', String(isPlaying));
+  musicToggle?.setAttribute('aria-label', isPlaying ? 'Pausar música Do Zero ao Império' : 'Tocar música Do Zero ao Império');
+
+  if (musicToggleIcon) {
+    musicToggleIcon.textContent = isPlaying ? '❚❚' : '▶';
+  }
+
+  if (musicToggleText) {
+    musicToggleText.textContent = 'Do Zero ao Império';
+  }
+}
+
+if (musicToggle && siteMusic) {
+  siteMusic.volume = 0.55;
+  updateMusicButton(false);
+
+  musicToggle.addEventListener('click', async () => {
+    if (siteMusic.paused) {
+      try {
+        await siteMusic.play();
+        updateMusicButton(true);
+      } catch (error) {
+        updateMusicButton(false);
+      }
+      return;
+    }
+
+    siteMusic.pause();
+    updateMusicButton(false);
+  });
+
+  siteMusic.addEventListener('play', () => updateMusicButton(true));
+  siteMusic.addEventListener('pause', () => updateMusicButton(false));
+  siteMusic.addEventListener('ended', () => updateMusicButton(false));
+}
 
 function splitText(element) {
   const text = element.textContent.trim();

@@ -1,0 +1,44 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="38" x2="444" y2="474" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1b0508"/>
+      <stop offset="0.45" stop-color="#050505"/>
+      <stop offset="1" stop-color="#4a0010"/>
+    </linearGradient>
+    <linearGradient id="red" x1="98" y1="91" x2="420" y2="422" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff7b89"/>
+      <stop offset="0.36" stop-color="#ff2146"/>
+      <stop offset="1" stop-color="#9e001f"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="147" y1="126" x2="372" y2="388" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.48" stop-color="#ffd6dc"/>
+      <stop offset="1" stop-color="#ff4962"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="0" stdDeviation="15" flood-color="#ff2146" flood-opacity="0.56"/>
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect x="34" y="34" width="444" height="444" rx="118" fill="url(#bg)"/>
+  <rect x="34" y="34" width="444" height="444" rx="118" fill="url(#red)" opacity="0.09"/>
+  <path d="M107 141C107 122.222 122.222 107 141 107H371C389.778 107 405 122.222 405 141V371C405 389.778 389.778 405 371 405H141C122.222 405 107 389.778 107 371V141Z" stroke="url(#red)" stroke-width="12" opacity="0.9"/>
+  <path d="M92 254H420" stroke="#ff2146" stroke-width="2" opacity="0.28"/>
+  <path d="M256 92V420" stroke="#ff2146" stroke-width="2" opacity="0.22"/>
+  <circle cx="256" cy="256" r="147" stroke="#ff2146" stroke-width="2" stroke-dasharray="16 18" opacity="0.35"/>
+  <circle cx="256" cy="256" r="96" fill="#ff2146" opacity="0.14" filter="url(#soft)"/>
+
+  <g filter="url(#glow)">
+    <path d="M136 340V172H184L256 257L328 172H376V340H325V253L273 314H239L187 253V340H136Z" fill="url(#steel)"/>
+    <path d="M156 188L256 306L356 188" stroke="#060606" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+    <path d="M156 188L256 306L356 188" stroke="url(#red)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M122 388H390" stroke="#ff4962" stroke-width="8" stroke-linecap="round" opacity="0.92"/>
+  <path d="M151 420H361" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <text x="256" y="447" text-anchor="middle" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="3" fill="#fff7f8">MSCODEX</text>
+</svg>

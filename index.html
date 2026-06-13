@@ -7,7 +7,7 @@
   <meta name="author" content="Lucas Ferreira Vilas Boas Costa" />
   <title>MSCODEX | Lucas Ferreira Vilas Boas Costa</title>
   <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#fff8f9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#fffafb" media="(prefers-color-scheme: light)" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,16 +59,42 @@
   <header class="site-header" id="top">
     <nav class="navbar" aria-label="Navegação principal">
       <a class="brand" href="#top" aria-label="MSCODEX, voltar ao topo">
-        <span class="brand-mark">
-          <img src="assets/img/logoweb.jpeg" alt="Logo MSCODEX" />
+        <span class="brand-mark ms-logo" aria-hidden="true">
+          <span class="logo-piece logo-piece-1"></span>
+          <span class="logo-piece logo-piece-2"></span>
+          <span class="logo-piece logo-piece-3"></span>
+          <span class="logo-piece logo-piece-4"></span>
+          <span class="logo-piece logo-piece-5"></span>
+          <span class="logo-piece logo-piece-6"></span>
+          <span class="logo-piece logo-piece-7"></span>
+          <span class="logo-piece logo-piece-8"></span>
+          <img src="assets/img/mscodex-logo.svg" alt="" />
         </span>
         <span class="brand-text">MSCODEX</span>
       </a>
+
+      <button class="music-toggle" type="button" data-music-toggle aria-label="Tocar música Do Zero ao Império" aria-pressed="false">
+        <span class="music-toggle-disc" aria-hidden="true">
+          <span class="music-toggle-icon">▶</span>
+        </span>
+        <span class="music-toggle-info">
+          <span class="music-toggle-label">Tocando agora</span>
+          <span class="music-toggle-text">Do Zero ao Império</span>
+        </span>
+        <span class="music-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
 
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="Alternar tema claro e escuro">
         <span class="theme-toggle-icon" aria-hidden="true">☀</span>
         <span class="theme-toggle-text">Claro</span>
       </button>
+
+      <audio data-site-music src="Do_Zero_ao_Império.mp3" preload="metadata" loop></audio>
 
       <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
         <span></span>

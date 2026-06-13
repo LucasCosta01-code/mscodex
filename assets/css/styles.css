@@ -826,6 +826,18 @@ h3 {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.shop-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.shop-card {
+  grid-column: span 4;
+}
+
+.shop-card-wide {
+  grid-column: span 8;
+}
+
 .glass-card,
 .project-card {
   position: relative;
@@ -920,6 +932,29 @@ h3 {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 28px;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.shop-card {
+  min-height: 100%;
+}
+
+.shop-card p {
+  min-height: 112px;
+}
+
+.shop-card-wide {
+  grid-column: span 8;
+}
+
+.shop-card-wide .project-actions {
+  justify-content: flex-start;
 }
 
 .timeline-wrap {
@@ -1019,18 +1054,70 @@ h3 {
   transform: translateX(120%);
 }
 
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .contact-icon {
   display: grid;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   place-items: center;
-  border: 1px solid rgba(255, 58, 82, 0.32);
-  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  border-radius: 17px;
   color: #fff;
-  background: linear-gradient(135deg, rgba(255, 33, 70, 0.28), rgba(101, 0, 15, 0.35));
-  box-shadow: 0 0 24px rgba(255, 33, 70, 0.12);
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 900;
+  background:
+    radial-gradient(circle at 30% 22%, color-mix(in srgb, currentColor 24%, transparent), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 33, 70, 0.12));
+  box-shadow: 0 0 22px color-mix(in srgb, currentColor 24%, transparent);
+}
+
+.contact-icon svg {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, currentColor 42%, transparent));
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.contact-icon svg path:first-child:last-child,
+.contact-icon-filled svg path,
+.contact-icon-whatsapp svg path,
+.contact-icon-tiktok svg path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.contact-icon-email {
+  color: #ff4f6d;
+}
+
+.contact-icon-whatsapp {
+  color: #25d366;
+}
+
+.contact-icon-linkedin {
+  color: #0a66c2;
+}
+
+.contact-icon-github {
+  color: #f0f6fc;
+}
+
+.contact-icon-tiktok {
+  color: #00f2ea;
+}
+
+.contact-icon-whatsapp svg,
+.contact-icon-tiktok svg {
+  width: 28px;
+  height: 28px;
 }
 
 .contact-info small,
@@ -1396,8 +1483,18 @@ h3 {
   }
 
   .skills-grid,
-  .projects-grid {
+  .projects-grid,
+  .shop-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shop-card,
+  .shop-card-wide {
+    grid-column: auto;
+  }
+
+  .shop-card p {
+    min-height: auto;
   }
 
   .project-topline {

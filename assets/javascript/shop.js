@@ -428,8 +428,40 @@
     });
   }
 
+  function bindAmbientMotion() {
+    const ambient = document.querySelector('[data-shop-ambient]');
+    const hero = document.querySelector('.shop-hero');
+    if (!ambient || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let raf = 0;
+    let targetX = 50;
+    let targetY = 30;
+
+    const apply = () => {
+      raf = 0;
+      ambient.style.setProperty('--shop-mx', `${targetX}%`);
+      ambient.style.setProperty('--shop-my', `${targetY}%`);
+      if (hero) {
+        hero.style.setProperty('--shop-mx', `${targetX}%`);
+        hero.style.setProperty('--shop-my', `${targetY}%`);
+      }
+    };
+
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        targetX = (e.clientX / Math.max(window.innerWidth, 1)) * 100;
+        targetY = (e.clientY / Math.max(window.innerHeight, 1)) * 100;
+        if (!raf) raf = requestAnimationFrame(apply);
+      },
+      { passive: true }
+    );
+  }
+
   async function init() {
     bindEvents();
+    bindAmbientMotion();
     renderCart();
     try {
       await fetchProducts();

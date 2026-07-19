@@ -153,11 +153,16 @@
       <button class="product-close" type="button" data-product-close aria-label="Fechar detalhes">×</button>
       <div class="product-modal-media" data-product-media></div>
       <div class="product-modal-body">
-        <p class="product-modal-kicker" data-product-category>Categoria</p>
-        <h2 id="product-title" data-product-title>Produto</h2>
-        <p class="product-modal-desc" data-product-desc></p>
-        <p class="product-modal-reqs" data-product-reqs hidden></p>
-        <div class="product-modal-tags" data-product-tags hidden></div>
+        <div class="product-modal-scroll">
+          <p class="product-modal-kicker" data-product-category>Categoria</p>
+          <h2 id="product-title" data-product-title>Produto</h2>
+          <p class="product-modal-desc" data-product-desc></p>
+          <div class="product-modal-reqs" data-product-reqs hidden>
+            <span class="product-modal-reqs-label">Requisitos</span>
+            <p data-product-reqs-text></p>
+          </div>
+          <div class="product-modal-tags" data-product-tags hidden></div>
+        </div>
         <div class="product-modal-foot">
           <div class="product-modal-price">
             <span>Preço</span>

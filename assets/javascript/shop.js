@@ -15,6 +15,7 @@
   const detailCategory = document.querySelector('[data-product-category]');
   const detailDesc = document.querySelector('[data-product-desc]');
   const detailReqs = document.querySelector('[data-product-reqs]');
+  const detailReqsText = document.querySelector('[data-product-reqs-text]');
   const detailTags = document.querySelector('[data-product-tags]');
   const detailPrice = document.querySelector('[data-product-price]');
   const detailAddBtn = document.querySelector('[data-detail-add]');
@@ -316,10 +317,10 @@
     if (detailReqs) {
       if (product.requirements) {
         detailReqs.hidden = false;
-        detailReqs.textContent = product.requirements;
+        if (detailReqsText) detailReqsText.textContent = product.requirements;
       } else {
         detailReqs.hidden = true;
-        detailReqs.textContent = '';
+        if (detailReqsText) detailReqsText.textContent = '';
       }
     }
 
@@ -344,6 +345,7 @@
     detailModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('product-open');
     detailAddBtn?.setAttribute('data-add-id', product.id);
+    detailModal.querySelector('.product-modal-scroll')?.scrollTo({ top: 0 });
   }
 
   function checkoutWhatsApp() {

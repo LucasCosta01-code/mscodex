@@ -9,6 +9,15 @@
   const cartTotalEl = document.querySelector('[data-cart-total]');
   const checkoutBtn = document.querySelector('[data-cart-checkout]');
   const totalCountEl = document.querySelector('[data-shop-total-count]');
+  const detailModal = document.querySelector('[data-product-modal]');
+  const detailMedia = document.querySelector('[data-product-media]');
+  const detailTitle = document.querySelector('[data-product-title]');
+  const detailCategory = document.querySelector('[data-product-category]');
+  const detailDesc = document.querySelector('[data-product-desc]');
+  const detailReqs = document.querySelector('[data-product-reqs]');
+  const detailTags = document.querySelector('[data-product-tags]');
+  const detailPrice = document.querySelector('[data-product-price]');
+  const detailAddBtn = document.querySelector('[data-detail-add]');
 
   if (!grid) return;
 
@@ -290,6 +299,53 @@
     document.body.classList.remove('cart-open');
   }
 
+  function closeDetail() {
+    if (!detailModal) return;
+    detailModal.classList.remove('is-open');
+    detailModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('product-open');
+  }
+
+  function renderDetail(product) {
+    if (!product || !detailModal) return;
+    if (detailTitle) detailTitle.textContent = product.name || 'Produto';
+    if (detailCategory) detailCategory.textContent = product.category || 'Geral';
+    if (detailDesc) detailDesc.textContent = product.description || '';
+    if (detailPrice) detailPrice.textContent = money(product.price);
+
+    if (detailReqs) {
+      if (product.requirements) {
+        detailReqs.hidden = false;
+        detailReqs.textContent = product.requirements;
+      } else {
+        detailReqs.hidden = true;
+        detailReqs.textContent = '';
+      }
+    }
+
+    if (detailTags) {
+      const tags = (product.tags || []).filter(Boolean);
+      if (tags.length) {
+        detailTags.hidden = false;
+        detailTags.innerHTML = tags.map((t) => `<span>${escapeHtml(t)}</span>`).join('');
+      } else {
+        detailTags.hidden = true;
+        detailTags.innerHTML = '';
+      }
+    }
+
+    if (detailMedia) {
+      detailMedia.innerHTML = product.image
+        ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" />`
+        : `<div class="product-media-fallback">${escapeHtml((product.category || 'MS').slice(0, 2))}</div>`;
+    }
+
+    detailModal.classList.add('is-open');
+    detailModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('product-open');
+    detailAddBtn?.setAttribute('data-add-id', product.id);
+  }
+
   function checkoutWhatsApp() {
     if (!cart.length) return;
     const lines = cart.map((item) => {
@@ -321,8 +377,16 @@
 
     grid.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-add-cart]');
-      if (!btn) return;
-      addToCart(btn.getAttribute('data-add-cart'), btn);
+      if (btn) {
+        addToCart(btn.getAttribute('data-add-cart'), btn);
+        return;
+      }
+      const card = e.target.closest('.shop-product-card');
+      if (card) {
+        const id = card.getAttribute('data-product-id');
+        const product = products.find((p) => p.id === id);
+        if (product) renderDetail(product);
+      }
     });
 
     document.querySelectorAll('[data-cart-open]').forEach((el) => {
@@ -331,6 +395,10 @@
 
     document.querySelectorAll('[data-cart-close]').forEach((el) => {
       el.addEventListener('click', closeCart);
+    });
+
+    document.querySelectorAll('[data-product-close]').forEach((el) => {
+      el.addEventListener('click', closeDetail);
     });
 
     document.querySelector('[data-cart-clear]')?.addEventListener('click', clearCart);
@@ -345,8 +413,16 @@
       if (rem) removeItem(rem.getAttribute('data-remove'));
     });
 
+    detailAddBtn?.addEventListener('click', () => {
+      const id = detailAddBtn.getAttribute('data-add-id');
+      if (id) addToCart(id, detailAddBtn);
+    });
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCart();
+      if (e.key === 'Escape') {
+        closeCart();
+        closeDetail();
+      }
     });
   }
 

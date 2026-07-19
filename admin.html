@@ -34,9 +34,18 @@
         </div>
         <span class="section-kicker">MSCODEX</span>
         <h1>Entrar no painel</h1>
-        <p>Receba um código temporário no WhatsApp ou no e-mail e entre com ele.</p>
+        <p>Receba um código temporário no WhatsApp/e-mail ou entre direto com usuário e senha.</p>
 
-        <form data-login-form class="admin-login-form" autocomplete="off">
+        <div class="admin-login-tabs" role="tablist">
+          <button type="button" class="admin-login-tab is-active" data-login-tab="otp" role="tab" aria-selected="true">
+            Código
+          </button>
+          <button type="button" class="admin-login-tab" data-login-tab="password" role="tab" aria-selected="false">
+            Usuário e senha
+          </button>
+        </div>
+
+        <form data-login-form class="admin-login-form" data-login-panel="otp" autocomplete="off">
           <fieldset class="admin-channel-group">
             <legend>Onde receber o código?</legend>
             <label class="admin-channel-option">
@@ -73,26 +82,23 @@
               required
             />
           </label>
-          <p class="admin-panel-hint" style="margin:0">O e-mail pode demorar alguns segundos. Olhe também a pasta de spam.</p>
+          <p class="admin-panel-hint">O e-mail pode demorar alguns segundos. Olhe também a pasta de spam.</p>
 
           <p class="admin-error" data-login-error hidden></p>
           <button class="btn btn-primary admin-btn-full" type="submit">Entrar no painel</button>
         </form>
 
-        <div class="admin-divider"><span>ou</span></div>
-
-        <form data-password-form class="admin-login-form" autocomplete="off">
-          <h2 style="margin:0">Entrar com usuário e senha</h2>
+        <form data-password-form class="admin-login-form" data-login-panel="password" autocomplete="off" hidden>
           <label>
             <span>Usuário</span>
-            <input type="text" name="username" autocomplete="username" required value="lucas" />
+            <input type="text" name="username" autocomplete="username" required placeholder="Seu usuário" />
           </label>
           <label>
             <span>Senha</span>
-            <input type="password" name="password" autocomplete="current-password" required value="tucas2" />
+            <input type="password" name="password" autocomplete="current-password" required placeholder="Sua senha" />
           </label>
           <p class="admin-error" data-password-error hidden></p>
-          <button class="btn btn-secondary admin-btn-full" type="submit" data-password-btn>Entrar com senha</button>
+          <button class="btn btn-primary admin-btn-full" type="submit" data-password-btn>Entrar com senha</button>
         </form>
 
         <a class="admin-back-link" href="loja.html">← Voltar à loja</a>
@@ -102,17 +108,30 @@
     <section class="admin-dashboard" data-admin-dashboard hidden>
       <header class="admin-topbar">
         <div class="admin-topbar-copy">
-          <span class="section-kicker">MSCODEX Admin</span>
-          <h1>Painel da loja</h1>
-          <p class="admin-user-line">
-            Olá, <strong data-admin-username>—</strong>
-            <span data-product-count class="admin-count-pill">0 produtos</span>
-          </p>
+          <span class="brand-mark ms-logo admin-ms-logo admin-topbar-logo" aria-hidden="true">
+            <span class="logo-piece logo-piece-1"></span>
+            <span class="logo-piece logo-piece-2"></span>
+            <span class="logo-piece logo-piece-3"></span>
+            <span class="logo-piece logo-piece-4"></span>
+            <span class="logo-piece logo-piece-5"></span>
+            <span class="logo-piece logo-piece-6"></span>
+            <span class="logo-piece logo-piece-7"></span>
+            <span class="logo-piece logo-piece-8"></span>
+            <img src="assets/img/mscodex-logo.svg" alt="" />
+          </span>
+          <div>
+            <span class="section-kicker">MSCODEX Admin</span>
+            <h1>Painel da loja</h1>
+            <p class="admin-user-line">
+              Olá, <strong data-admin-username>—</strong>
+              <span data-product-count class="admin-count-pill">0 produtos</span>
+            </p>
+          </div>
         </div>
         <div class="admin-topbar-actions">
           <a class="btn btn-secondary" href="loja.html" target="_blank" rel="noopener">Ver loja</a>
           <button type="button" class="btn btn-secondary" data-toggle-credentials>Conta</button>
-          <button type="button" class="btn btn-secondary" data-logout>Sair</button>
+          <button type="button" class="btn btn-danger" data-logout>Sair</button>
         </div>
       </header>
 
@@ -133,7 +152,7 @@
             </label>
             <label>
               <span>Nova senha (opcional)</span>
-              <input type="password" name="new_password" autocomplete="new-password" minlength="4" />
+              <input type="password" name="new_password" autocomplete="new-password" minlength="8" placeholder="Mín. 8 caracteres" />
             </label>
           </div>
           <p class="admin-error" data-credentials-error hidden></p>
@@ -142,8 +161,17 @@
         </form>
       </div>
 
+      <div class="admin-mobile-tabs" data-admin-mobile-tabs role="tablist">
+        <button type="button" class="admin-mobile-tab is-active" data-admin-tab="list" role="tab" aria-selected="true">
+          Catálogo
+        </button>
+        <button type="button" class="admin-mobile-tab" data-admin-tab="form" role="tab" aria-selected="false">
+          Produto
+        </button>
+      </div>
+
       <div class="admin-layout">
-        <div class="admin-list-panel">
+        <div class="admin-list-panel is-active" data-admin-panel="list">
           <div class="admin-list-head">
             <div>
               <h2>Catálogo</h2>
@@ -160,7 +188,7 @@
           </div>
         </div>
 
-        <div class="admin-form-panel">
+        <div class="admin-form-panel" data-admin-panel="form">
           <div class="admin-panel-title">
             <h2 data-form-title>Novo produto</h2>
             <p class="admin-panel-hint">Preencha os dados e salve para publicar na loja</p>

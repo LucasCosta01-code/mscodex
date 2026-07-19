@@ -122,40 +122,33 @@ window.mscodexCompressImage = async function mscodexCompressImage(file, maxBytes
   }
 };
 
-/** Envia imagem para o Storage do Supabase e retorna URL pública. */
-window.mscodexUploadProductImage = async function mscodexUploadProductImage(fileOrBlob, filenameHint = 'produto') {
+/**
+ * Envia imagem para o Storage do Supabase via Edge Function autenticada
+ * (o token de admin é validado no servidor antes de qualquer escrita no bucket).
+ */
+window.mscodexUploadProductImage = async function mscodexUploadProductImage(
+  fileOrBlob,
+  filenameHint = 'produto',
+  adminToken = ''
+) {
   const { url, anonKey } = window.MSCODEX_SUPABASE;
-  const safeName = String(filenameHint || 'produto')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-    .slice(0, 40) || 'produto';
-  const filename = `${Date.now()}-${safeName}.jpg`;
-  const endpoint = `${url}/storage/v1/object/product-images/${filename}`;
+  if (!adminToken) throw new Error('Não autenticado');
 
-  const res = await fetch(endpoint, {
+  const form = new FormData();
+  form.append('token', adminToken);
+  form.append('filename', filenameHint || 'produto');
+  form.append('file', fileOrBlob, 'upload.jpg');
+
+  const res = await fetch(`${url}/functions/v1/admin-upload-image`, {
     method: 'POST',
     headers: {
       apikey: anonKey,
       Authorization: `Bearer ${anonKey}`,
-      'Content-Type': 'image/jpeg',
-      'x-upsert': 'true',
     },
-    body: fileOrBlob,
+    body: form,
   });
 
-  if (!res.ok) {
-    let detail = '';
-    try {
-      const err = await res.json();
-      detail = err.message || err.error || '';
-    } catch {
-      /* ignore */
-    }
-    throw new Error(detail || 'Falha no upload da imagem');
-  }
-
-  return `${url}/storage/v1/object/public/product-images/${filename}`;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Falha no upload da imagem');
+  return data.url;
 };

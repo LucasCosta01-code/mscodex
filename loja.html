@@ -147,6 +147,30 @@
     </div>
   </aside>
 
+  <aside class="product-modal" data-product-modal aria-hidden="true" aria-label="Detalhes do produto">
+    <div class="product-modal-backdrop" data-product-close></div>
+    <div class="product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="product-title">
+      <button class="product-close" type="button" data-product-close aria-label="Fechar detalhes">×</button>
+      <div class="product-modal-media" data-product-media></div>
+      <div class="product-modal-body">
+        <p class="product-modal-kicker" data-product-category>Categoria</p>
+        <h2 id="product-title" data-product-title>Produto</h2>
+        <p class="product-modal-desc" data-product-desc></p>
+        <p class="product-modal-reqs" data-product-reqs hidden></p>
+        <div class="product-modal-tags" data-product-tags hidden></div>
+        <div class="product-modal-foot">
+          <div class="product-modal-price">
+            <span>Preço</span>
+            <strong data-product-price>—</strong>
+          </div>
+          <button class="btn btn-primary" type="button" data-detail-add>
+            Adicionar ao carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span data-year></span> MSCODEX. Loja oficial.</p>

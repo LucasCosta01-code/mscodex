@@ -33,6 +33,10 @@
   const credentialsForm = document.querySelector('[data-credentials-form]');
   const credentialsError = document.querySelector('[data-credentials-error]');
   const credentialsSuccess = document.querySelector('[data-credentials-success]');
+  const loginTabs = document.querySelectorAll('[data-login-tab]');
+  const loginPanels = document.querySelectorAll('[data-login-panel]');
+  const adminMobileTabs = document.querySelectorAll('[data-admin-tab]');
+  const adminPanels = document.querySelectorAll('[data-admin-panel]');
 
   let products = [];
   let editingId = null;
@@ -144,6 +148,38 @@
     if (dashView) dashView.hidden = screen !== 'painel';
     document.body.classList.toggle('admin-authed', screen === 'painel');
   }
+
+  function setLoginTab(name) {
+    loginPanels.forEach((el) => {
+      el.hidden = el.getAttribute('data-login-panel') !== name;
+    });
+    loginTabs.forEach((btn) => {
+      const active = btn.getAttribute('data-login-tab') === name;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    hide(loginError);
+    hide(pwdError);
+  }
+
+  function setAdminPanel(name) {
+    adminPanels.forEach((el) => {
+      el.classList.toggle('is-active', el.getAttribute('data-admin-panel') === name);
+    });
+    adminMobileTabs.forEach((btn) => {
+      const active = btn.getAttribute('data-admin-tab') === name;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  loginTabs.forEach((btn) => {
+    btn.addEventListener('click', () => setLoginTab(btn.getAttribute('data-login-tab')));
+  });
+
+  adminMobileTabs.forEach((btn) => {
+    btn.addEventListener('click', () => setAdminPanel(btn.getAttribute('data-admin-tab')));
+  });
 
   function normalizeCode(raw) {
     const txt = String(raw || '').trim();
@@ -379,7 +415,7 @@
         const activeClass = p.active ? '' : ' is-inactive';
         const selected = editingId === p.id ? ' is-selected' : '';
         const thumb = p.image
-          ? `<img src="${p.image.replace(/"/g, '&quot;')}" alt="" loading="lazy" />`
+          ? `<img src="${escapeHtml(p.image)}" alt="" loading="lazy" />`
           : `<span class="admin-thumb-fallback">${escapeHtml((p.category || 'MS').slice(0, 2))}</span>`;
         const statusChip = p.active
           ? '<span class="admin-status-chip is-active">Ativo</span>'
@@ -471,7 +507,7 @@
     try {
       const blob = await window.mscodexCompressImage(pendingImageFile);
       const nameHint = productForm.elements.name.value || 'produto';
-      const publicUrl = await window.mscodexUploadProductImage(blob, nameHint);
+      const publicUrl = await window.mscodexUploadProductImage(blob, nameHint, token);
       productForm.elements.image.value = publicUrl;
       pendingImageFile = null;
       revokePreview();
@@ -602,6 +638,7 @@
   document.querySelector('[data-new-product]')?.addEventListener('click', () => {
     resetForm();
     renderList();
+    setAdminPanel('form');
   });
 
   productSearch?.addEventListener('input', () => {
@@ -704,6 +741,7 @@
     if (!product) return;
     fillForm(product);
     renderList();
+    setAdminPanel('form');
   });
 
   productForm?.addEventListener('submit', async (e) => {
@@ -756,6 +794,7 @@
       resetForm();
       await loadProducts();
       show(formSuccess, 'Produto excluído.');
+      setAdminPanel('list');
     } catch (err) {
       show(formError, err.message || 'Erro ao excluir');
     }

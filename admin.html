@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Acesso restrito</title>
+  <meta name="theme-color" content="#050505" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/jpeg" href="assets/img/logoweb.jpeg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="admin-page">
+  <div class="admin-bg" aria-hidden="true"></div>
+  <div class="admin-noise" aria-hidden="true"></div>
+
+  <div class="admin-shell">
+    <section class="admin-login" data-admin-login>
+      <div class="admin-login-card">
+        <div class="admin-logo-row" aria-hidden="true">
+          <span class="brand-mark ms-logo admin-ms-logo">
+            <span class="logo-piece logo-piece-1"></span>
+            <span class="logo-piece logo-piece-2"></span>
+            <span class="logo-piece logo-piece-3"></span>
+            <span class="logo-piece logo-piece-4"></span>
+            <span class="logo-piece logo-piece-5"></span>
+            <span class="logo-piece logo-piece-6"></span>
+            <span class="logo-piece logo-piece-7"></span>
+            <span class="logo-piece logo-piece-8"></span>
+            <img src="assets/img/mscodex-logo.svg" alt="" />
+          </span>
+        </div>
+        <span class="section-kicker">MSCODEX</span>
+        <h1>Entrar no painel</h1>
+        <p>Receba um código temporário no WhatsApp ou no e-mail e entre com ele.</p>
+
+        <form data-login-form class="admin-login-form" autocomplete="off">
+          <fieldset class="admin-channel-group">
+            <legend>Onde receber o código?</legend>
+            <label class="admin-channel-option">
+              <input type="radio" name="channel" value="whatsapp" checked />
+              <span>
+                <strong>WhatsApp</strong>
+                <small data-admin-whatsapp-label>(11) 96067-0956</small>
+              </span>
+            </label>
+            <label class="admin-channel-option">
+              <input type="radio" name="channel" value="email" />
+              <span>
+                <strong>E-mail</strong>
+                <small data-admin-email-label>lucascostapix1@gmail.com</small>
+              </span>
+            </label>
+          </fieldset>
+
+          <button class="btn btn-secondary admin-btn-full" type="button" data-send-otp>
+            Enviar código
+          </button>
+
+          <p class="admin-success" data-otp-hint hidden></p>
+
+          <label>
+            <span>Código do e-mail (ou cole o link inteiro)</span>
+            <input
+              type="text"
+              name="otp"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="8"
+              placeholder="000000"
+              required
+            />
+          </label>
+          <p class="admin-panel-hint" style="margin:0">O e-mail pode demorar alguns segundos. Olhe também a pasta de spam.</p>
+
+          <p class="admin-error" data-login-error hidden></p>
+          <button class="btn btn-primary admin-btn-full" type="submit">Entrar no painel</button>
+        </form>
+
+        <div class="admin-divider"><span>ou</span></div>
+
+        <form data-password-form class="admin-login-form" autocomplete="off">
+          <h2 style="margin:0">Entrar com usuário e senha</h2>
+          <label>
+            <span>Usuário</span>
+            <input type="text" name="username" autocomplete="username" required value="lucas" />
+          </label>
+          <label>
+            <span>Senha</span>
+            <input type="password" name="password" autocomplete="current-password" required value="tucas2" />
+          </label>
+          <p class="admin-error" data-password-error hidden></p>
+          <button class="btn btn-secondary admin-btn-full" type="submit" data-password-btn>Entrar com senha</button>
+        </form>
+
+        <a class="admin-back-link" href="loja.html">← Voltar à loja</a>
+      </div>
+    </section>
+
+    <section class="admin-dashboard" data-admin-dashboard hidden>
+      <header class="admin-topbar">
+        <div class="admin-topbar-copy">
+          <span class="section-kicker">MSCODEX Admin</span>
+          <h1>Painel da loja</h1>
+          <p class="admin-user-line">
+            Olá, <strong data-admin-username>—</strong>
+            <span data-product-count class="admin-count-pill">0 produtos</span>
+          </p>
+        </div>
+        <div class="admin-topbar-actions">
+          <a class="btn btn-secondary" href="loja.html" target="_blank" rel="noopener">Ver loja</a>
+          <button type="button" class="btn btn-secondary" data-toggle-credentials>Conta</button>
+          <button type="button" class="btn btn-secondary" data-logout>Sair</button>
+        </div>
+      </header>
+
+      <div class="admin-credentials-panel" data-credentials-panel hidden>
+        <div class="admin-panel-title">
+          <h2>Alterar usuário / senha</h2>
+          <p>Atualize suas credenciais de acesso ao painel.</p>
+        </div>
+        <form data-credentials-form class="admin-product-form" autocomplete="off">
+          <label>
+            <span>Senha atual</span>
+            <input type="password" name="current_password" required autocomplete="current-password" />
+          </label>
+          <div class="admin-form-row">
+            <label>
+              <span>Novo usuário (opcional)</span>
+              <input type="text" name="new_username" autocomplete="off" />
+            </label>
+            <label>
+              <span>Nova senha (opcional)</span>
+              <input type="password" name="new_password" autocomplete="new-password" minlength="4" />
+            </label>
+          </div>
+          <p class="admin-error" data-credentials-error hidden></p>
+          <p class="admin-success" data-credentials-success hidden></p>
+          <button class="btn btn-primary" type="submit">Salvar credenciais</button>
+        </form>
+      </div>
+
+      <div class="admin-layout">
+        <div class="admin-list-panel">
+          <div class="admin-list-head">
+            <div>
+              <h2>Catálogo</h2>
+              <p class="admin-panel-hint">Clique em um item para editar</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-new-product>+ Novo produto</button>
+          </div>
+          <label class="admin-search">
+            <span class="visually-hidden">Buscar produto</span>
+            <input type="search" placeholder="Buscar por nome ou categoria…" data-product-search />
+          </label>
+          <div class="admin-product-list" data-product-list>
+            <p class="shop-loading">Carregando…</p>
+          </div>
+        </div>
+
+        <div class="admin-form-panel">
+          <div class="admin-panel-title">
+            <h2 data-form-title>Novo produto</h2>
+            <p class="admin-panel-hint">Preencha os dados e salve para publicar na loja</p>
+          </div>
+
+          <form class="admin-product-form" data-product-form autocomplete="off">
+            <input type="hidden" name="id" />
+            <input type="hidden" name="image" />
+
+            <div class="admin-dropzone" data-dropzone>
+              <input type="file" name="imageFile" accept="image/*" hidden data-image-input />
+              <div class="admin-dropzone-empty" data-dropzone-empty>
+                <span class="admin-dropzone-icon" aria-hidden="true">⬆</span>
+                <strong>Arraste uma imagem ou clique para enviar</strong>
+                <small>Qualquer tamanho · comprimimos automaticamente</small>
+              </div>
+              <div class="admin-image-preview" data-image-preview hidden>
+                <img alt="Prévia do produto" />
+                <div class="admin-image-actions">
+                  <button type="button" class="btn btn-secondary" data-change-image>Trocar</button>
+                  <button type="button" class="btn btn-danger" data-clear-image>Remover</button>
+                </div>
+              </div>
+            </div>
+            <p class="admin-upload-status" data-upload-status hidden></p>
+
+            <label>
+              <span>Nome do produto</span>
+              <input type="text" name="name" required maxlength="120" placeholder="Ex.: Pack Site Profissional" />
+            </label>
+
+            <label>
+              <span>Descrição</span>
+              <textarea name="description" rows="4" maxlength="800" placeholder="O que o cliente recebe neste pack..."></textarea>
+            </label>
+
+            <label>
+              <span>Requisitos <em>(opcional)</em></span>
+              <textarea name="requirements" rows="3" maxlength="800" placeholder="Ex.: briefing, logos, acessos..."></textarea>
+            </label>
+
+            <div class="admin-form-row">
+              <label>
+                <span>Preço (R$)</span>
+                <input type="number" name="price" min="0" step="0.01" required placeholder="0,00" />
+              </label>
+              <label>
+                <span>Categoria</span>
+                <input type="text" name="category" list="category-list" required placeholder="Sites" />
+                <datalist id="category-list">
+                  <option value="Sites"></option>
+                  <option value="Bots"></option>
+                  <option value="RP / Servidores"></option>
+                  <option value="Serviços"></option>
+                  <option value="Custom"></option>
+                </datalist>
+              </label>
+            </div>
+
+            <label>
+              <span>Tags <em>(separadas por vírgula)</em></span>
+              <input type="text" name="tags" placeholder="HTML, CSS, UI/UX" />
+            </label>
+
+            <div class="admin-form-row admin-checks">
+              <label class="admin-check">
+                <input type="checkbox" name="featured" />
+                <span>Destaque na loja</span>
+              </label>
+              <label class="admin-check">
+                <input type="checkbox" name="active" checked />
+                <span>Produto ativo</span>
+              </label>
+            </div>
+
+            <p class="admin-error" data-form-error hidden></p>
+            <p class="admin-success" data-form-success hidden></p>
+
+            <div class="admin-form-actions">
+              <button class="btn btn-primary" type="submit" data-save-btn>Salvar produto</button>
+              <button class="btn btn-secondary" type="button" data-reset-form>Limpar</button>
+              <button class="btn btn-danger" type="button" data-delete-product hidden>Excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="assets/javascript/supabase-config.js"></script>
+  <script src="assets/javascript/admin.js"></script>
+</body>
+</html>

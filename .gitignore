@@ -1,0 +1,4 @@
+.env
+node_modules/
+assets/img/products/*
+!assets/img/products/.gitkeep

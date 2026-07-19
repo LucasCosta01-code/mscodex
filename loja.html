@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Loja MSCODEX — packs e soluções digitais para sites, bots, RP e automações." />
+  <meta name="author" content="Lucas Ferreira Vilas Boas Costa" />
+  <title>Loja | MSCODEX</title>
+  <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fffafb" media="(prefers-color-scheme: light)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/jpeg" href="assets/img/logoweb.jpeg" />
+  <link rel="apple-touch-icon" href="assets/img/logoweb.jpeg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="shop-page">
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Navegação principal">
+      <a class="brand" href="index.html" aria-label="MSCODEX, voltar ao início">
+        <span class="brand-mark ms-logo" aria-hidden="true">
+          <span class="logo-piece logo-piece-1"></span>
+          <span class="logo-piece logo-piece-2"></span>
+          <span class="logo-piece logo-piece-3"></span>
+          <span class="logo-piece logo-piece-4"></span>
+          <span class="logo-piece logo-piece-5"></span>
+          <span class="logo-piece logo-piece-6"></span>
+          <span class="logo-piece logo-piece-7"></span>
+          <span class="logo-piece logo-piece-8"></span>
+          <img src="assets/img/mscodex-logo.svg" alt="" />
+        </span>
+        <span class="brand-text">MSCODEX</span>
+      </a>
+
+      <button class="music-toggle" type="button" data-music-toggle aria-label="Tocar música Do Zero ao Império" aria-pressed="false">
+        <span class="music-toggle-disc" aria-hidden="true">
+          <span class="music-toggle-icon">▶</span>
+        </span>
+        <span class="music-toggle-info">
+          <span class="music-toggle-label">Player</span>
+          <span class="music-toggle-text">Do Zero ao Império</span>
+        </span>
+        <span class="music-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Alternar tema claro e escuro">
+        <span class="theme-toggle-icon" aria-hidden="true">☀</span>
+        <span class="theme-toggle-text">Claro</span>
+      </button>
+
+      <button class="cart-fab" type="button" data-cart-open aria-label="Abrir carrinho">
+        <span class="cart-fab-label">Carrinho</span>
+        <span class="cart-fab-count" data-cart-count>0</span>
+      </button>
+
+      <audio data-site-music src="Do_Zero_ao_Império.mp3" preload="metadata" loop></audio>
+
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-menu" data-menu>
+        <a href="index.html#inicio">Início</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#projetos">Projetos</a>
+        <a href="loja.html" aria-current="page">Loja</a>
+        <a href="index.html#contato">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section shop-hero" aria-labelledby="shop-title">
+      <div class="shop-hero-glow" aria-hidden="true"></div>
+      <div class="container shop-hero-inner">
+        <div class="shop-hero-copy">
+          <span class="section-kicker">Loja MSCODEX</span>
+          <h1 id="shop-title">Packs digitais com entrega direta no WhatsApp.</h1>
+          <p>Escolha os produtos, monte o carrinho e finalize com valor e total prontos para conversar.</p>
+          <div class="shop-hero-meta">
+            <span data-shop-total-count>0 produtos</span>
+            <span>Checkout via WhatsApp</span>
+            <span>Sem cadastro</span>
+          </div>
+        </div>
+
+        <div class="shop-catalog">
+          <div class="shop-toolbar-row">
+            <div class="shop-toolbar" data-shop-filters aria-label="Filtrar por categoria">
+              <button type="button" class="shop-filter is-active" data-filter="all">Todos</button>
+            </div>
+            <p class="shop-catalog-hint" data-shop-visible-count>Mostrando todos</p>
+          </div>
+
+          <div class="shop-status" data-shop-status hidden></div>
+
+          <div class="shop-live-grid is-ready" data-shop-grid>
+            <div class="shop-skeleton" aria-hidden="true">
+              <div class="shop-skeleton-card"></div>
+              <div class="shop-skeleton-card"></div>
+              <div class="shop-skeleton-card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="shop-toast" data-shop-toast hidden role="status" aria-live="polite"></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-label="Carrinho de compras">
+    <div class="cart-drawer-backdrop" data-cart-close></div>
+    <div class="cart-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-drawer-head">
+        <div>
+          <p class="cart-drawer-kicker">Pedido</p>
+          <h2 id="cart-title">Seu carrinho</h2>
+        </div>
+        <button type="button" class="cart-close" data-cart-close aria-label="Fechar carrinho">×</button>
+      </div>
+      <div class="cart-drawer-body" data-cart-items>
+        <p class="cart-empty">Seu carrinho está vazio.</p>
+      </div>
+      <div class="cart-drawer-foot">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <strong data-cart-total>R$ 0,00</strong>
+        </div>
+        <button type="button" class="btn btn-primary cart-checkout" data-cart-checkout disabled>
+          Finalizar no WhatsApp
+        </button>
+        <button type="button" class="btn btn-secondary cart-clear" data-cart-clear>
+          Limpar carrinho
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span data-year></span> MSCODEX. Loja oficial.</p>
+      <a class="back-to-top" href="index.html">Voltar ao portfólio</a>
+    </div>
+  </footer>
+
+  <script src="assets/javascript/supabase-config.js"></script>
+  <script src="assets/javascript/script.js"></script>
+  <script src="assets/javascript/shop.js"></script>
+</body>
+</html>

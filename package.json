@@ -2,11 +2,8 @@
   "name": "mscodex-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfólio MSCODEX de Lucas Ferreira Vilas Boas Costa.",
+  "description": "Portfólio MSCODEX — HTML, CSS e JavaScript puro.",
   "scripts": {
     "start": "node server.js"
-  },
-  "engines": {
-    "node": ">=18"
   }
 }
